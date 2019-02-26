@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/wyc1856"
+                        userId="root"
+                        password="123456"/>
+
+        <!-- 生成实体配置 -->
+        <javaModelGenerator targetPackage="club.wyc1856.mybatisspringboot.domain"
+                            targetProject="C:/workspace/coding/spring-boot-demo/mybatis-spring-boot/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成mapper.xml配置(目前还没找到在resource目录下生成的方法，暂时先在java目录下生成，然后收到copy到resource目录下-_-) -->
+        <sqlMapGenerator targetPackage="mapper.wyc1856"
+                         targetProject="C:/workspace/coding/spring-boot-demo/mybatis-spring-boot/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成mapper接口配置 -->
+        <javaClientGenerator targetPackage="club.wyc1856.mybatisspringboot.mapper.wyc1856"
+                             targetProject="C:/workspace/coding/spring-boot-demo/mybatis-spring-boot/src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- 需要生成数据库表，可配置多项 -->
+        <table tableName="generator_test" domainObjectName="GeneratorTest"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

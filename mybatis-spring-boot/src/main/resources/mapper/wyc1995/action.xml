@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="club.wyc1856.mybatisspringboot.mapper.wyc1995.ActionMapper">
+    <resultMap id="actionResultMap" type="club.wyc1856.mybatisspringboot.domain.Action">
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="origin" property="origin"/>
+        <result column="terminal" property="terminal"/>
+        <result column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    
+    <parameterMap id="Action" type="club.wyc1856.mybatisspringboot.domain.Action"/>
+
+    <sql id="all_columns">
+        id, user_id, origin, terminal, state, create_time, update_time
+    </sql>
+
+    <select id="findByUserId" resultMap="actionResultMap" parameterType="Integer">
+        SELECT <include refid="all_columns"/> FROM action WHERE user_id = #{userId};
+    </select>
+
+    <insert id="insert" parameterMap="Action" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO action ('user_id', 'origin', 'terminal', 'state') VALUES (#{userId}, #{origin}, #{terminal}, #{state});
+    </insert>
+
+    <update id="updateUserAction" parameterMap="Action">
+        UPDATE action SET
+         <if test="origin != null">origin = #{origin}</if>
+         <if test="terminal != null">origin = #{terminal}</if>
+         <if test="state != null">origin = #{state}</if>
+        WHERE user_id = #{userId};
+    </update>
+</mapper>
