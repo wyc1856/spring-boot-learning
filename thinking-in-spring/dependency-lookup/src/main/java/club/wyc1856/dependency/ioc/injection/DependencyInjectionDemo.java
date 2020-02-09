@@ -25,11 +25,11 @@ public class DependencyInjectionDemo {
         //依赖来源二：内建依赖（只能通过依赖注入，不能通过依赖查找）
         BeanFactory internalBeanFactory = userRepository.getBeanFactory();
         System.out.println("内建依赖：" + internalBeanFactory);
-        System.out.println("内建依赖BeanFactory和自己声明的BeanFactory是否是相同的Bean：" + (internalBeanFactory == beanFactory));
-//        System.out.println("依赖查找内建依赖：" + lookupInternalDependency(beanFactory));
 
+//        System.out.println("依赖查找内建依赖：" + lookupInternalDependency(beanFactory));
+        whoIsIocContainer(beanFactory, internalBeanFactory);
         ObjectFactory<ApplicationContext> objectFactory = userRepository.getObjectFactory();
-        System.out.println("延迟查找注入的BeanFactory和自己声明的BeanFactory是否是相同的Bean：" + (objectFactory.getObject() == beanFactory));
+        System.out.println(objectFactory.getObject() == beanFactory);
 
         //依赖来源三：内建Bean
         Environment environment = beanFactory.getBean(Environment.class);
@@ -44,5 +44,16 @@ public class DependencyInjectionDemo {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static void whoIsIocContainer(BeanFactory beanFactory, BeanFactory internalBeanFactory) {
+        System.out.println("自己声明的beanFactory和内建依赖internalBeanFactory是否相同：" + (beanFactory == internalBeanFactory));
+        //为什么用户自己声明的BeanFactory和内建的BeanFactory不一致？因为声明的BeanFactory其实是Application，它是BeanFactory的子接口。
+        //AbstractRefreshableApplicationContext中声明了一个DefaultListableBeanFactory的成员变量beanFactory，并且内部的一些方法也都是委派给了beanFactory去执行
+        //所以这里的内建依赖internalBeanFactory应该和用户声明的BeanFactory（ClassPathXmlApplication）的成员变量beanFactory相同
+        if (beanFactory instanceof ClassPathXmlApplicationContext) {
+            ClassPathXmlApplicationContext applicationContext = (ClassPathXmlApplicationContext) beanFactory;
+            System.out.println("声明的beanFactory(ClassPathXmlApplication)的成员变量beanFactory和内建依赖internalBeanFactory是否相同：" + (applicationContext.getBeanFactory() == internalBeanFactory));
+        }
     }
 }
