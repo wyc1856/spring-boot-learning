@@ -1,4 +1,4 @@
-package club.wyc1856.dependency.ioc.lookup.domain;
+package club.wyc1856.dependency.ioc.domain;
 
 /**
  * @author wyc1856

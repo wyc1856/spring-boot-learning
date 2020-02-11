@@ -1,7 +1,7 @@
 package club.wyc1856.dependency.ioc.lookup;
 
 import club.wyc1856.dependency.ioc.annotation.Supper;
-import club.wyc1856.dependency.ioc.lookup.domain.User;
+import club.wyc1856.dependency.ioc.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;

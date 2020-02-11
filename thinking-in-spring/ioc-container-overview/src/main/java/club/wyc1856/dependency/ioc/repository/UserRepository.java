@@ -1,6 +1,6 @@
 package club.wyc1856.dependency.ioc.repository;
 
-import club.wyc1856.dependency.ioc.lookup.domain.User;
+import club.wyc1856.dependency.ioc.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;

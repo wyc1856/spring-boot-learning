@@ -1,6 +1,6 @@
 package club.wyc1856.dependency.ioc.container;
 
-import club.wyc1856.dependency.ioc.lookup.domain.User;
+import club.wyc1856.dependency.ioc.domain.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.Map;
 
 /**
- * 注解类型的{@link ApplicationContext}作为Ioc容器示例
+ * 注解类型的 {@link ApplicationContext} 作为Ioc容器示例
  *
  * @author wyc1856
  * @date 2020/2/11
