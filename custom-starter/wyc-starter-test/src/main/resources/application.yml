@@ -1,0 +1,8 @@
+autoconfig:
+  enable:
+    wyc: true
+
+wyc:
+  hello:
+    prefix: prefix_
+    suffix: _suffix
