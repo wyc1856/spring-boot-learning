@@ -1,10 +1,14 @@
 package club.wyc1856.dependency.ioc.domain;
 
+import java.io.Serializable;
+
 /**
  * @author wyc1856
  * @date 2020/1/9
  **/
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 3192454566270880605L;
 
     private Long id;
 

@@ -7,16 +7,27 @@
         <result column="nick_name" property="nickName"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
+        <result column="version" property="version"/>
     </resultMap>
 
     <parameterMap id="User" type="club.wyc1856.mybatisspringboot.domain.User"/>
 
     <sql id="all_columns">
-        id, nick_name, create_time, update_time
+        id, nick_name, create_time, update_time, version
     </sql>
 
-    <select id="findById" resultMap="userResult" resultType="Integer">
+    <select id="findById" resultMap="userResult" parameterType="Integer" useCache="true">
         SELECT <include refid="all_columns"/> FROM user WHERE id = #{id}
     </select>
+
+    <select id="findLastPage" resultMap="userResult" statementType="STATEMENT" useCache="true">
+        SELECT <include refid="all_columns"/> FROM user ORDER BY `update_time` DESC LIMIT 10
+    </select>
+
+    <update id="updateById" parameterType="Integer" flushCache="false">
+        UPDATE `user` SET `update_time` = now() WHERE `id` = #{id}
+    </update>
+
+    <cache/>
     
 </mapper>
