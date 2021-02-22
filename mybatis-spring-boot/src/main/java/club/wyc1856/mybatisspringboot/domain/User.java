@@ -2,6 +2,7 @@ package club.wyc1856.mybatisspringboot.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +11,8 @@ import java.time.LocalDateTime;
  * @description 用户信息
  **/
 @Data
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 8237704933402919611L;
     /**
      * 用户id
      */
@@ -27,6 +29,8 @@ public class User {
      * 最后更新时间
      */
     private LocalDateTime updateTime;
+
+    private Integer version;
 
     public Integer getId() {
         return id;
@@ -58,5 +62,13 @@ public class User {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }
