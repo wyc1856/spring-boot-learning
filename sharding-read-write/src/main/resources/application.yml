@@ -1,6 +1,6 @@
-# 配置真实数据源
-sharding:
-  jdbc:
+spring:
+  shardingsphere:
+    # 配置数据源
     datasource:
       names: master1,slave0
       master1:
@@ -17,24 +17,30 @@ sharding:
         jdbc-url: jdbc:mysql://127.0.0.1:3340/test?characterEncoding=utf-8&autoReconnect=true&serverTimezone=Asia/Shanghai
         username: root
         password: root@123
-    # 配置读写分离
-    config:
-      masterslave:
-        # 配置从库选择策略，提供轮询与随机，这里选择用轮询
-        load-balance-algorithm-type: round_robin
-        name: ms
-        master-data-source-name: master1
-        slave-data-source-names: slave0
-      # 开启SQL显示，默认值: false，注意：仅配置读写分离时不会打印日志
-      props:
-        sql:
-          show: true
-spring:
-  main:
-    allow-bean-definition-overriding: true
-logging:
-  level:
-    club:
-      wyc1856:
-        sharding:
-          mapper: debug
+    sharding:
+      # 读写分离
+      master-slave-rules:
+        ds:
+          master-data-source-name: master1
+          slave-data-source-names: slave0
+      # 水平分表
+      tables:
+        t_order:
+          actual-data-nodes: ds.t_order_$->{0..2}
+          table-strategy:
+            inline:
+              sharding-column: id
+              algorithm-expression: t_order_$->{id % 3}
+    # 开启SQL显示，默认值: false，注意：仅配置读写分离时不会打印日志
+    props:
+      sql:
+        show: true
+#  main:
+#    allow-bean-definition-overriding: true
+
+#logging:
+#  level:
+#    club:
+#      wyc1856:
+#        sharding:
+#          mapper: debug

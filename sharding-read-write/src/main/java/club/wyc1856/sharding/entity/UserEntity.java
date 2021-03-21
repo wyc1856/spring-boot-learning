@@ -20,7 +20,9 @@ public class UserEntity {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String name;
+    private String userName;
 
     private Integer age;
+
+    private String address;
 }
