@@ -47,7 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
             removeById(user.getId());
         });
         //当前事务使用过 master 数据源，后续的查询则也使用主数据源（至于在一个事务中不同表是否也按这个规则还没做测试）
-        UserEntity wyc1856 = new UserEntity().setId(id).setName("wyc1856").setAge(25);
+        UserEntity wyc1856 = new UserEntity().setId(id).setUserName("wyc1856").setAge(25);
         log.info("插入数据:{}", wyc1856);
         saveOrUpdate(wyc1856);
         return wyc1856;
@@ -56,13 +56,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     private void selectInsertSelect(Long id) {
         UserEntity userEntity = selectInsert(id);
         log.info("重新查询, user:[{}]", getById(userEntity.getId()));
-        throw new RuntimeException("exception");
+//        throw new RuntimeException("exception");
     }
 
     private void insertSelect(Long id) {
-        UserEntity wyc1856 = new UserEntity().setId(id).setName("insertSelect").setAge(25);
+        UserEntity wyc1856 = new UserEntity().setId(id).setUserName("insertSelect").setAge(25);
         log.info("插入数据:{}", wyc1856);
         log.info("重新查询, user:[{}]", getById(wyc1856.getId()));
-        throw new RuntimeException("exception");
+//        throw new RuntimeException("exception");
     }
 }
