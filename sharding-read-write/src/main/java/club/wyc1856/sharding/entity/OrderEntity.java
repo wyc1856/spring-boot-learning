@@ -4,25 +4,23 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * todo
  *
  * @author wyc1856
- * @date 2021/3/12
+ * @date 2021/3/21
  **/
-@TableName("user")
 @Data
-@Accessors(chain = true)
-public class UserEntity {
+@TableName("t_order")
+public class OrderEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    private String userName;
+    private String orderNo;
 
-    private Integer age;
+    private Long orderAmount;
 
-    private String address;
+    private String remark;
 }
